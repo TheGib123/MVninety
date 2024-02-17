@@ -47,27 +47,6 @@ class Read_PRN():
                 data.append(row)
         return data
 
-    def __format_data(self):
-        formatted_data = {}
-        for header, rows in self.seperated_data.items():
-            formatted_rows = []
-            if (header == '"RECORDER ID" " DATE" " HOUR" " IN" " UN" " KW    " " KVAR  " " KVAR  " "       "'): 
-                formatted_rows = self.__headers_1(rows)
-            elif (header == '"RECORDER ID" " DATE" " HOUR" " IN" " UN" " KW    " " KVAR  " " KVAR  " " KW    " " KVAR  " " KVAR  " "       " "       "'):
-                formatted_rows = self.__headers_2(rows)
-            elif (header == '"RECORDER ID" " DATE" " HOUR" " IN" " UN" " KW    " " KW    " " KW    " "       "'):
-                formatted_rows = self.__headers_3(rows)
-            elif (header == '"RECORDER ID" " DATE" " HOUR" " IN" " UN" " KW    " " KW    " " KVAR  " " KVAR  "'):
-                formatted_rows = self.__headers_4(rows)
-            elif (header == '"RECORDER ID" " DATE" " HOUR" " IN" " UN" " KW    " " KW    " " MVAR  " " MVAR  "'):
-                formatted_rows = self.__headers_5(rows)
-            elif (header == '"RECORDER ID" " DATE" " HOUR" " IN" " UN" " KW    " " KVAR  " "       " "       "'):
-                formatted_rows = self.__headers_6(rows)
-
-            if (len(formatted_rows) > 0):
-                formatted_data[header] = formatted_rows
-        return formatted_data
-
     def __seperate_meter_types(self):
         data = {}
         temp_data = []
@@ -108,7 +87,33 @@ class Read_PRN():
             lines = lines + self.__read_file(file)
         return lines
 
-    ####################
+    ####################################################################################
+    # Edit the below section to format more meter types                                #
+    ####################################################################################
+
+    formatted_cols = ['RECORDER_ID', 'KW', 'KVAR', 'DATE_TIME']
+
+    def __format_data(self):
+        formatted_data = {}
+        for header, rows in self.seperated_data.items():
+            formatted_rows = []
+            if (header == '"RECORDER ID" " DATE" " HOUR" " IN" " UN" " KW    " " KVAR  " " KVAR  " "       "'): 
+                formatted_rows = self.__headers_1(rows)
+            elif (header == '"RECORDER ID" " DATE" " HOUR" " IN" " UN" " KW    " " KVAR  " " KVAR  " " KW    " " KVAR  " " KVAR  " "       " "       "'):
+                formatted_rows = self.__headers_2(rows)
+            elif (header == '"RECORDER ID" " DATE" " HOUR" " IN" " UN" " KW    " " KW    " " KW    " "       "'):
+                formatted_rows = self.__headers_3(rows)
+            elif (header == '"RECORDER ID" " DATE" " HOUR" " IN" " UN" " KW    " " KW    " " KVAR  " " KVAR  "'):
+                formatted_rows = self.__headers_4(rows)
+            elif (header == '"RECORDER ID" " DATE" " HOUR" " IN" " UN" " KW    " " KW    " " MVAR  " " MVAR  "'):
+                formatted_rows = self.__headers_5(rows)
+            elif (header == '"RECORDER ID" " DATE" " HOUR" " IN" " UN" " KW    " " KVAR  " "       " "       "'):
+                formatted_rows = self.__headers_6(rows)
+
+            if (len(formatted_rows) > 0):
+                formatted_data[header] = formatted_rows
+        return formatted_data
+    
     def __format_datetime(self, row):
         d = row[1]
         t = row[2]

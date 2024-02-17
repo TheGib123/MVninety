@@ -1,6 +1,7 @@
 # ignore files
 *.txt
 test.py
+test.ipynb
 
 # ignore directory
 output/
