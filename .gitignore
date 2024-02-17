@@ -1,0 +1,8 @@
+# ignore files
+*.txt
+test.py
+
+# ignore directory
+output/
+meter_data/
+__pycache__/
