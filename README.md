@@ -47,6 +47,8 @@ MVninty.records_count_by_header(mv_data, 'record_counts_by_meter.txt')
 
 ## Creating Pandas DataFrame
 ```
+import pandas as pd
+import numpy as np
 df = pd.DataFrame(mv_data.combined_formatted_data, columns=mv_data.formatted_cols)
 df['KVA'] = np.sqrt((df['KW'] * df['KW']) + (df['KVAR'] * df['KVAR']))    # creates and calculates column KVA
 print(df.head())
