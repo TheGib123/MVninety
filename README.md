@@ -1,6 +1,12 @@
 # MVninety Overview
 MVninety is used to read PRN files. It tries to structure the data into a single data structure. It also allows you to view the different types of meters for further analysis.  
 
+## MVninety Install
+Navigate to directory with setup.py and run the below command
+```
+pip install .
+```
+
 ## Initialize MVninety
 ```
 import MVninety
